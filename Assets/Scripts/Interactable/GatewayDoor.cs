@@ -7,21 +7,22 @@ namespace Interactable
 {
     public class GatewayDoor : MonoBehaviour
     {
+        [SerializeField] private SceneName m_SceneToGo = SceneName.CuteScene;
+        
         private SceneManager m_SceneManager => SceneManager.Instance;
         
         private bool m_PlayerEntered = false;
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.tag);
             if (other.gameObject.CompareTag ("Player"))
             {
-                Debug.Log("AMK");
+                Debug.Log(m_SceneToGo);
 
                 if (!m_PlayerEntered)
                 {
                     m_PlayerEntered = true;
 
-                    StartCoroutine(m_SceneManager.LoadScene(SceneName.TrippyScene));
+                    StartCoroutine(m_SceneManager.LoadScene(m_SceneToGo));
                 }
             }
             
